@@ -1,0 +1,400 @@
+openapi: 3.0.0
+info:
+  title: Blog API
+  description: A simple blog application having CRUD operation
+  version: 1.0.0
+servers:
+- url: http://localhost:9500/blog
+paths :
+  /user/register:
+    post:
+      summary: For Balance Enquiry
+      operationId: doBalanceInquiry
+      x-google-backend:
+        address: http://localhost:9500/blog/user/register
+      requestBody:
+        description: "For User Registration"
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties: 
+                id: 
+                  type: "number"
+                author:
+                  type: "string"
+                username: 
+                  type: "string"
+                email: 
+                  type: "string"
+                password: 
+                    type: "string"
+                status:
+                    type: "string"
+                pansn:
+                    type: "string"
+                isFallback:
+                    type: "string"                               
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error"        
+  /token:
+    post:
+      summary: For generate a token
+      operationId: token 
+      x-google-backend:
+        address:  http://localhost:9500/blog/token
+      requestBody:
+        description: "For generate a token and login Author"
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties: 
+                email: 
+                  type: "string"
+                password:
+                  type: "string"                               
+      responses: 
+          "200": 
+            description: "Succeess"
+          "500":
+            description: "Unexpected error"
+  /createPost:
+    post:
+      summary: createPost
+      operationId: createPost
+      x-google-backend:
+        address: http://localhost:9500/blog/createPost
+      requestBody:
+        description: "For Creating a Post"
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties: 
+                id: 
+                  type: "number"
+                titel:
+                  type: "string"
+                Desc: 
+                  type: "string"
+                userid: 
+                  type: "number"                            
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /getPosts:
+    get:
+      summary: Get Posts
+      operationId: getPosts
+      x-google-backend:
+        address: http://localhost:9500/blog/getPosts
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /getPosts/{id}:
+    get:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: Get Posts
+      operationId: getPosts/id
+      x-google-backend:
+        address: http://localhost:9500/blog/getPosts/{id}
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /updatePost/{id}:
+    put:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: For updateing Post
+      operationId: updatePost
+      x-google-backend:
+        address: http://localhost:9500/blog/updatePost/{id}
+      requestBody:
+        description: "For User Registration"
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties: 
+                id: 
+                  type: "number"
+                titel:
+                  type: "string"
+                Desc: 
+                  type: "string"
+                userid: 
+                  type: "number"                                
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error"
+  /uniquePosts:
+    get:
+      summary: Get uniquePosts
+      operationId: uniquePosts
+      x-google-backend:
+        address: http://localhost:9500/blog/uniquePosts
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /deletePost/{id}:
+    delete:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: Delete Post
+      operationId: deletePost/id
+      x-google-backend:
+        address: http://localhost:9500/blog/deletePost
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error"
+  /addComments:
+    post:
+      summary: addComments
+      operationId: addComments
+      x-google-backend:
+        address: http://localhost:9500/blog/addComments
+      requestBody:
+        description: "For adding a Comment"
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties: 
+                id: 
+                  type: "number"
+                name:
+                  type: "string"
+                email: 
+                  type: "string"
+                comments: 
+                  type: "string"  
+                postid: 
+                  type: "number"  
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /allComments:
+    get:
+      summary: Get all Comments
+      operationId: allComments
+      x-google-backend:
+        address: http://localhost:9500/blog/allComments
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /getComments/{id}:
+    get:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: Get Comments
+      operationId: getComments/id
+      x-google-backend:
+        address: http://localhost:9500/blog/getComments/{id}
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /updatecomment/{id}:
+    put:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: For updating comments
+      operationId: updatecomment
+      x-google-backend:
+        address: http://localhost:9500/blog/updatecomment/{id}
+      requestBody:
+        description: "For updating comments"
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties: 
+                id: 
+                  type: "number"
+                name:
+                  type: "string"
+                email: 
+                  type: "string"
+                comments: 
+                  type: "string"  
+                postid: 
+                  type: "number"                                  
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error"
+  /deletePostdeleteComment/{id}:
+    delete:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: Delete comment
+      operationId: deleteComment/id
+      x-google-backend:
+        address: http://localhost:9500/blog/deleteComment
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error"  
+  /addTags:
+    post:
+      summary: addTags
+      operationId: addTags
+      x-google-backend:
+        address: http://localhost:9500/blog/addTags
+      requestBody:
+        description: "For adding a tags"
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties: 
+                id: 
+                  type: "number"
+                name:
+                  type: "string"
+                tags: 
+                  type: "string"
+                postid: 
+                  type: "number"  
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /allTags:
+    get:
+      summary: Get all tags
+      operationId: allTags
+      x-google-backend:
+        address: http://localhost:9500/blog/allTags
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /getTags/{id}:
+    get:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: Get tags
+      operationId: getTags/id
+      x-google-backend:
+        address: http://localhost:9500/blog/getTags/{id}
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+  /updateTags/{id}:
+    put:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: For updating tags
+      operationId: updateTags
+      x-google-backend:
+        address: http://localhost:9500/blog/updateTags/{id}
+      requestBody:
+        description: "For updating tags"
+        content:
+          application/json:
+            schema: 
+              type: "object"
+              properties: 
+                id: 
+                  type: "number"
+                name:
+                  type: "string"
+                tags: 
+                  type: "string"
+                postid: 
+                  type: "number"                                  
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error"
+  /deleteTag/{id}:
+    delete:
+      parameters:
+      - in: path
+        name: id
+        required: true
+        description: id
+        schema:
+          type: number
+      summary: Delete comment
+      operationId: deleteTag/id
+      x-google-backend:
+        address: http://localhost:9500/blog/deleteTag
+      responses: 
+          "200": 
+            description: "Success"
+          "500":
+            description: "Unexpected error" 
+
+
+
